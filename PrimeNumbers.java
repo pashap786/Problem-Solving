@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 //Program to find prime numbers till N, where N is an integer received as stdin.
-class TestClass {
+class PrimeNumbers {
     public static void main(String args[] ) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
