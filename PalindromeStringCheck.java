@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 //Program to check whether a string is Palindrome or not. Program responds with "YES" or "NO" in the console.
-class TestClass {
+class PalindromeStringCheck {
     public static void main(String args[] ) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
