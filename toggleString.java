@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.*;
+//import java.util.*;
  
 //Program to toggle between uppercase and lowercase in a string.
 class TestClass {
