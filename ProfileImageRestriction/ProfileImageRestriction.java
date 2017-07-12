@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
-class TestClass {
+class ProfileImageRestriction {
     public static void main(String args[] ) throws Exception {
 
         BufferedReader size = new BufferedReader(new InputStreamReader(System.in));
