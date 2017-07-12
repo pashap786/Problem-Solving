@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
  
+//Program to toggle between uppercase and lowercase in a string.
 class TestClass {
     public static void main(String args[] ) throws Exception {
 
@@ -9,6 +10,7 @@ class TestClass {
         String line = br.readLine();
         int counter = line.length();
         
+	//String length can be max 100 chars.    
         if(counter<=100 && counter >= 1){
             char[] ch = line.toCharArray();  
             StringBuilder sbr = new StringBuilder("");
