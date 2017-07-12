@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 //Given 3 integers i,j and k. Program to find how many numbers between i and j are divisible by k.
-class TestClass {
+class CountDivisors {
     public static void main(String args[] ) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
