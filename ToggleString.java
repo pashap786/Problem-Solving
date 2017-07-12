@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 //import java.util.*;
  
 //Program to toggle between uppercase and lowercase in a string.
-class TestClass {
+class ToggleString {
     public static void main(String args[] ) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
