@@ -5,12 +5,9 @@ import java.util.*;
 //Given 3 integers i,j and k. Program to find how many numbers between i and j are divisible by k.
 class CountDivisors {
     public static void main(String args[] ) throws Exception {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line = br.readLine();  
-        System.out.println(calculate(line));
-        
-        
+        System.out.println(calculate(line));      
     }
     
     public static int calculate(String input){
