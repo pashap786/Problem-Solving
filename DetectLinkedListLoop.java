@@ -1,5 +1,6 @@
 class DetectLinkedListLoop
 {
+ //return 1 if loop exists, return 0 if loop doesnt exist.
  int detectLoop(Node head)
   {
         Node node=head;
