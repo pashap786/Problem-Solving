@@ -103,6 +103,7 @@ public class DeepLearning4j {
         
         Evaluation evaluation = new Evaluation(1);
         INDArray output = multiLayerNetwork.output(testSet.getFeatureMatrix());
+        output = output.cond(new AbsValueGreaterThan(0.50));
         evaluation.eval(testSet.getLabels(),output);
         System.out.println("args = [" + evaluation.stats() + "]");
     }
