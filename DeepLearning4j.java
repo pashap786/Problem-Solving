@@ -34,7 +34,7 @@ import java.util.List;
 public class DeepLearning4j {
 
     private static Logger log = LoggerFactory.getLogger("DeepLearning4j.class");
-
+    
     public static void main(String[] args) throws IOException, InterruptedException {
 
         Schema schema = new Schema.Builder()
@@ -57,7 +57,7 @@ public class DeepLearning4j {
 
         int labelIndex = 11;
         int numClasses = 1;
-        int batchSize = 100;
+        int batchSize = 10;
 
         DataSetIterator iterator = new RecordReaderDataSetIterator(transformProcessRecordReader,batchSize,labelIndex,numClasses);
         List<DataSet> dataList = new ArrayList<>();
@@ -98,9 +98,9 @@ public class DeepLearning4j {
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(configuration);
         multiLayerNetwork.init();
         multiLayerNetwork.setListeners(new ScoreIterationListener());
-        for(int i=0;i<100;i++){
-          multiLayerNetwork.fit(trainSet);
-        }
+        DataSetIterator kFoldIterator = new KFoldIterator(trainSet);
+        multiLayerNetwork.fit(kFoldIterator,100);
+        
         Evaluation evaluation = new Evaluation(1);
         INDArray output = multiLayerNetwork.output(testSet.getFeatureMatrix());
         evaluation.eval(testSet.getLabels(),output);
