@@ -68,6 +68,15 @@ classifier = KerasClassifier(build_fn=buildANN, batch_size=10, epochs=100)
 accuracy = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10, n_jobs=4)
 #mean = accuracy.mean()
 #variance = accuracy.std()
+from keras.models import load_model
+classifier.fit(X_train,y_train)
+classifier.model.fit(X_train,y_train)
+#classifier.model.save_weights(filepath='ann_model')
+classifier.model.save(filepath='ann_model')
+json_string = classifier.model.to_json()
+json_file = open('ann_model_json','w')
+json_file.write(json_string)
+json_file.close()
 
     
 y_pred = classifier.predict(X_test)
