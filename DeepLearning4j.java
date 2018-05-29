@@ -85,8 +85,8 @@ public class DeepLearning4j {
         MultiLayerConfiguration configuration = new NeuralNetConfiguration.Builder()
                                                     .updater(new Adam())
                                                     .list()
-                                                    .layer(new DenseLayer.Builder().nIn(11).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.1).build())
-                                                    .layer(new DenseLayer.Builder().nIn(6).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.1).build())
+                                                    .layer(new DenseLayer.Builder().nIn(11).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.9).build())
+                                                    .layer(new DenseLayer.Builder().nIn(6).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.9).build())
                                                     .layer(new OutputLayer.Builder(LossFunctions.LossFunction.XENT)
                                                                           .nIn(6).nOut(1).weightInit(WeightInit.UNIFORM).activation(Activation.SIGMOID).build())
                                                     .backprop(true).pretrain(false)
@@ -101,7 +101,7 @@ public class DeepLearning4j {
         
         Evaluation evaluation = new Evaluation(1);
         INDArray output = multiLayerNetwork.output(testSet.getFeatureMatrix());
-        output = output.cond(new AbsValueGreaterThan(0.50));
+        //output = output.cond(new AbsValueGreaterThan(0.50));
         evaluation.eval(testSet.getLabels(),output);
         System.out.println("args = [" + evaluation.stats() + "]");
     }
