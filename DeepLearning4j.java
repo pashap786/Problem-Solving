@@ -83,7 +83,7 @@ public class DeepLearning4j {
         log.info("Building Model------------------->>>>>>>>>");
 
         MultiLayerConfiguration configuration = new NeuralNetConfiguration.Builder()
-                                                    .updater(new Adam())
+                                                    .updater(new Adam(0.0001D))
                                                     .list()
                                                     .layer(new DenseLayer.Builder().nIn(11).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.9).build())
                                                     .layer(new DenseLayer.Builder().nIn(6).nOut(6).weightInit(WeightInit.UNIFORM).activation(Activation.RELU).dropOut(0.9).build())
