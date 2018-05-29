@@ -96,8 +96,11 @@ public class DeepLearning4j {
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(configuration);
         multiLayerNetwork.init();
         multiLayerNetwork.setListeners(new ScoreIterationListener());
-        DataSetIterator kFoldIterator = new KFoldIterator(trainSet);
-        multiLayerNetwork.fit(kFoldIterator,100);
+       // DataSetIterator kFoldIterator = new KFoldIterator(trainSet);
+        //multiLayerNetwork.fit(kFoldIterator,100);
+        for(int i=0;i<100;i++){
+            multiLayerNetwork.fit(trainSet);
+        }
         
         Evaluation evaluation = new Evaluation(1);
         INDArray output = multiLayerNetwork.output(testSet.getFeatureMatrix());
