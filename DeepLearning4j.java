@@ -78,7 +78,8 @@ public class DeepLearning4j {
         model.fit(splitter.getTrainIterator(),10);
 
 
-
+        Evaluation evaluation = new Evaluation(1);
+        INDArray output = model.output(splitter.getTestIterator()); //Throws error: Exception in thread "main" org.nd4j.linalg.exception.ND4JIllegalStateException: Can't concatenate 0 arrays
 /*
         Evaluation evaluation = new Evaluation(1);
         INDArray output = model.output(splitter.getTestIterator());
