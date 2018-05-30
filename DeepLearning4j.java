@@ -58,6 +58,9 @@ public class DeepLearning4j {
         int batchSize = 10;
 
         DataSetIterator iterator = new RecordReaderDataSetIterator(transformProcessRecordReader,batchSize,labelIndex,numClasses);
+        DataNormalization dataNormalization = new NormalizerStandardize();
+        dataNormalization.fit(iterator);
+        iterator.setPreProcessor(dataNormalization);
         DataSetIteratorSplitter splitter = new DataSetIteratorSplitter(iterator,10000,0.8);
 
         log.info("Building Model------------------->>>>>>>>>");
