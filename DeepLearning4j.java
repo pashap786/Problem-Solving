@@ -75,7 +75,7 @@ public class DeepLearning4j {
         MultiLayerNetwork model = new MultiLayerNetwork(configuration);
         model.init();
         model.setListeners(new ScoreIterationListener(100));
-        model.fit(splitter.getTrainIterator(),10);
+        model.fit(splitter.getTrainIterator(),100);
 
 
         Evaluation evaluation = new Evaluation(1);
