@@ -79,7 +79,7 @@ public class DeepLearning4j {
         model.init();
         model.setListeners(new ScoreIterationListener(100));
         model.fit(splitter.getTrainIterator(),100);
-        Evaluation evaluation = model.evaluate(splitter.getTestIterator(), iterator.getLabels());
+        Evaluation evaluation = model.evaluate(splitter.getTestIterator(),Arrays.asList("0","1"));
         System.out.println("args = " + evaluation.stats() + "");
 
         //Evaluation evaluation = new Evaluation(1);
