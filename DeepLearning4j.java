@@ -61,7 +61,7 @@ public class DeepLearning4j {
         DataNormalization dataNormalization = new NormalizerStandardize();
         dataNormalization.fit(iterator);
         iterator.setPreProcessor(dataNormalization);
-        DataSetIteratorSplitter splitter = new DataSetIteratorSplitter(iterator,10000,0.8);
+        DataSetIteratorSplitter splitter = new DataSetIteratorSplitter(iterator,1000,0.8);
 
         log.info("Building Model------------------->>>>>>>>>");
 
