@@ -6,6 +6,7 @@ import org.datavec.api.transform.TransformProcess;
 import org.datavec.api.transform.schema.Schema;
 import org.deeplearning4j.datasets.datavec.RecordReaderDataSetIterator;
 import org.deeplearning4j.datasets.iterator.DataSetIteratorSplitter;
+import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
@@ -14,7 +15,10 @@ import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
+import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
+import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
+import org.nd4j.linalg.dataset.api.preprocessor.NormalizerStandardize;
 import org.nd4j.linalg.io.ClassPathResource;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
@@ -23,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
-
 public class DeepLearning4j {
 
     private static Logger log = LoggerFactory.getLogger("DeepLearning4j.class");
@@ -62,8 +65,7 @@ public class DeepLearning4j {
         dataNormalization.fit(iterator);
         iterator.setPreProcessor(dataNormalization);
         DataSetIteratorSplitter splitter = new DataSetIteratorSplitter(iterator,1000,0.8);
-
-        log.info("Building Model------------------->>>>>>>>>");
+log.info("Building Model------------------->>>>>>>>>");
 
         MultiLayerConfiguration configuration = new NeuralNetConfiguration.Builder()
                 .updater(new Adam(0.0001D))
@@ -77,15 +79,28 @@ public class DeepLearning4j {
 
         MultiLayerNetwork model = new MultiLayerNetwork(configuration);
         model.init();
+
+/*        UIServer uiServer = UIServer.getInstance();
+        StatsStorage statsStorage = new FileStatsStorage(new File("deeplearning.dl4j"));
+        int listenerFrequency = 1;
+        model.setListeners(new StatsListener(statsStorage, listenerFrequency));
+        uiServer.attach(statsStorage);*/
         model.setListeners(new ScoreIterationListener(100));
-        model.fit(splitter.getTrainIterator(),100);
+
+        model.fit(splitter.getTrainIterator(),10);
+        DataSet dataSet = (splitter.getTestIterator()).next();
+
+        System.out.println("args = [" + Arrays.toString(model.predict(dataSet.getFeatureMatrix()))  + "]");
         Evaluation evaluation = model.evaluate(splitter.getTestIterator(),Arrays.asList("0","1"));
+
         System.out.println("args = " + evaluation.stats() + "");
 
-        //Evaluation evaluation = new Evaluation(1);
-       // INDArray output = model.output(splitter.getTestIterator()); //Throws error: Exception in thread "main" org.nd4j.linalg.exception.ND4JIllegalStateException: Can't concatenate 0 arrays
-/*
-        Evaluation evaluation = new Evaluation(1);
+
+      //  Evaluation evaluation = new Evaluation(1);
+       // INDArray output = model.output(splitter.getTestIterator());
+
+
+/*        Evaluation evaluation = new Evaluation(1);
         INDArray output = model.output(splitter.getTestIterator());
        // output = output.cond(new AbsValueGreaterThan(0.50));
         DataSetIterator splitIterator = splitter.getTestIterator();
