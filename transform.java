@@ -1,9 +1,7 @@
 
     Set set = new HashSet<>();
-    TransformProcessRecordReader temp = transformProcessRecordReader.;
+    TransformProcessRecordReader temp = transformProcessRecordReader;
      for(int i=1;i<=4991;i++){
-            System.out.println("args = [" + transformProcessRecordReader.hasNext() + 
-             "]");
             while(temp.hasNext()){
                 set.add(temp.next().get(i).toDouble());
             }
