@@ -1,5 +1,5 @@
 
-    Set set = new HashSet<>();
+    Set<Double> set = new HashSet<>();
     TransformProcessRecordReader temp = transformProcessRecordReader;
      for(int i=1;i<=4991;i++){
             while(temp.hasNext()){
